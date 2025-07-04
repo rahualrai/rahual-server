@@ -1,0 +1,19 @@
+# Docker data directories
+/portainer-data/
+/vaultwarden-data/
+/filebrowser-db/
+/filebrowser-config/
+/grafana/
+/immich/db/
+/immich/upload/
+
+# Cloudflared creds
+*.json
+
+# Environment files
+.env
+
+# Node_modules, logs, OS files
+node_modules/
+*.log
+.DS_Store

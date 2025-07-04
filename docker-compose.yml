@@ -1,0 +1,154 @@
+services:
+
+  web:
+    image: caddy:latest
+    ports:
+      - "3000:80"
+    volumes:
+      - ./site:/srv
+      - ./Caddyfile:/etc/caddy/Caddyfile
+
+  vaultwarden:
+    image: vaultwarden/server:latest
+    container_name: vaultwarden
+    restart: always
+    volumes:
+      - ./vaultwarden-data:/data
+    ports:
+      - "3010:80"
+    labels:
+      - glance.0.enable=true
+      - glance.0.name=Vaultwarden
+      - glance.0.url=https://vault.rahual.com
+    environment:
+      - ADMIN_TOKEN=${VAULTWARDEN_ADMIN_TOKEN}
+
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: portainer
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./portainer-data:/data
+    ports:
+      - "9000:9000"
+    labels:
+      - glance.0.enable=true
+      - glance.0.name=Portainer
+      - glance.0.url=https://port.rahual.com
+    environment:
+      - ADMIN_PASSWORD=${PORTAINER_ADMIN_PASSWORD_BCRYPT}
+
+  watchtower:
+    image: containrrr/watchtower
+    container_name: watchtower
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: --cleanup --schedule "0 0 * * *"
+
+  filebrowser:
+    image: filebrowser/filebrowser:latest
+    container_name: filebrowser
+    volumes:
+      - ./files:/srv
+      - ./filebrowser-db:/database
+      - ./filebrowser-config:/config
+    ports:
+      - 8082:80
+    restart: unless-stopped
+    labels:
+      - glance.0.enable=true
+      - glance.0.name=Filebrowser
+      - glance.0.url=https://files.rahual.com
+    env_file:
+      - .env
+    environment:
+      - FB_ADMIN_USER=${FB_ADMIN_USER}
+      - FB_ADMIN_PASSWORD=${FB_ADMIN_PASSWORD}
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    restart: unless-stopped
+    ports:
+      - "3001:3000"
+    volumes:
+      - ./grafana:/var/lib/grafana
+    env_file:
+      - .env
+    labels:
+      - glance.0.enable=true
+      - glance.0.name=Grafana
+      - glance.0.url=https://dash.rahual.com
+    env_file:
+      - .env
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+    restart: unless-stopped
+    labels:
+      - glance.0.enable=true
+      - glance.0.name=Prometheus
+      - glance.0.url=http://localhost:9090
+
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:latest
+    container_name: cadvisor
+    ports:
+      - "8085:8080"
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+    devices:
+      - /dev/kmsg
+    restart: unless-stopped
+    labels:
+      - glance.0.enable=true
+      - glance.0.name=cAdvisor
+      - glance.0.url=http://localhost:8085
+
+  node-exporter:
+    image: prom/node-exporter:latest
+    container_name: node-exporter
+    command:
+      - --path.rootfs=/host
+      - --collector.filesystem.ignored-mount-points=^/(sys|proc|dev|host|etc)($$|/)
+    volumes:
+      - /:/host:ro,rslave
+    ports:
+      - "9100:9100"
+    restart: unless-stopped
+
+  glance:
+    image: glanceapp/glance:latest
+    container_name: glance
+    ports:
+      - "8280:8080"
+    volumes:
+      - ./config:/app/config
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - GLANCE_PLUGINS=docker
+      - GLANCE_DOCKER_ENDPOINT=http://glance-docker-ext:8081
+    depends_on:
+      - glance-docker-ext
+    restart: unless-stopped
+
+  glance-docker-ext:
+    image: dvdandroid/glance-docker-container-ext
+    container_name: glance-docker-ext
+    environment:
+      - DOCKER_HOST=unix:///var/run/docker.sock
+      - PORT=8081
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: unless-stopped
