@@ -4,8 +4,12 @@
 /filebrowser-db/
 /filebrowser-config/
 /grafana/
-/immich/db/
-/immich/upload/
+/immich/
+/immich-data/
+/personal-site/
+/postgres/
+/site/
+/files/
 
 # Cloudflared creds
 *.json
