@@ -1,3 +1,4 @@
+---
 services:
 
   web:
@@ -81,8 +82,6 @@ services:
       - glance.0.enable=true
       - glance.0.name=Grafana
       - glance.0.url=https://dash.rahual.com
-    env_file:
-      - .env
 
   prometheus:
     image: prom/prometheus:latest
