@@ -25,7 +25,7 @@ services:
       - SHOW_PASSWORD_HINTS=false
       - LOG_LEVEL=warn
       - EXTENDED_LOGGING=true
-      TZ=America/New_York
+      - TZ=America/New_York
 
   portainer:
     image: portainer/portainer-ce:latest
@@ -218,35 +218,9 @@ services:
       timeout: 20s
       retries: 3
 
-  dawarich:
-    contianer_name: dawarich
-    image: freikin/dawarich:latest
-    restart: always
-    ports:
-      - "8472:3000"
-        environment:
-      - RAILS_ENV=production
-      - DATABASE_URL=postgresql://dawarich_user:secure_password@dawarich_postgres:5432/dawarich_production
-    volumes:
-      - dawarich_data:/app/storage
-    depends_on:
-      - dawarich_postgres
-    restart: unless-stopped
-
-  dawarich_postgres:
-    image: postgres:15
-    container_name: dawarich_db
-    environment:
-      - POSTGRES_DB=dawarich_production
-      - POSTGRES_USER=dawarich_user
-      - POSTGRES_PASSWORD=${DAWARICH_DB_PASSWORD}
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    restart: unless-stopped
 
 volumes:
   model-cache:
   mealie-data:
   mealie-pgdata:
-  dawarich_data:
   postgres_data:
