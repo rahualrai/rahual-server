@@ -36,7 +36,6 @@ The main stack is orchestrated via `docker-compose.yml` and includes:
 **Productivity Apps:**
 - N8N - Workflow automation (port 5678)
 - Mealie - Recipe management (port 9925) with dedicated PostgreSQL
-- Dawarich - Location tracking (port 8472) with dedicated PostgreSQL
 
 ### Separate Immich Stack
 
@@ -130,7 +129,6 @@ docker-compose pull && docker-compose up -d
 | Immich | 2283 | Photo management |
 | N8N | 5678 | Workflow automation |
 | Mealie | 9925 | Recipe management |
-| Dawarich | 8472 | Location tracking |
 
 ## Security Considerations
 
