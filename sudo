@@ -1,0 +1,43 @@
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
+tcp        0      0 0.0.0.0:3010            0.0.0.0:*               LISTEN      -                   
+tcp        0      0 127.0.0.1:631           0.0.0.0:*               LISTEN      -                   
+tcp        0      0 0.0.0.0:3000            0.0.0.0:*               LISTEN      -                   
+tcp        0      0 0.0.0.0:3001            0.0.0.0:*               LISTEN      -                   
+tcp        0      0 0.0.0.0:2283            0.0.0.0:*               LISTEN      -                   
+tcp        0      0 127.0.0.1:33095         0.0.0.0:*               LISTEN      -                   
+tcp        0      0 0.0.0.0:8082            0.0.0.0:*               LISTEN      -                   
+tcp        0      0 0.0.0.0:8085            0.0.0.0:*               LISTEN      -                   
+tcp        0      0 0.0.0.0:9000            0.0.0.0:*               LISTEN      -                   
+tcp        0      0 0.0.0.0:9090            0.0.0.0:*               LISTEN      -                   
+tcp        0      0 0.0.0.0:9100            0.0.0.0:*               LISTEN      -                   
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      -                   
+tcp        0      0 0.0.0.0:5678            0.0.0.0:*               LISTEN      -                   
+tcp        0      0 0.0.0.0:9925            0.0.0.0:*               LISTEN      -                   
+tcp        0      0 127.0.0.1:20241         0.0.0.0:*               LISTEN      -                   
+tcp        0      0 100.80.189.127:52218    0.0.0.0:*               LISTEN      -                   
+tcp6       0      0 :::3010                 :::*                    LISTEN      -                   
+tcp6       0      0 :::3000                 :::*                    LISTEN      -                   
+tcp6       0      0 :::3001                 :::*                    LISTEN      -                   
+tcp6       0      0 fd7a:115c:a1e0::8:33244 :::*                    LISTEN      -                   
+tcp6       0      0 :::2283                 :::*                    LISTEN      -                   
+tcp6       0      0 :::8082                 :::*                    LISTEN      -                   
+tcp6       0      0 :::8085                 :::*                    LISTEN      -                   
+tcp6       0      0 :::9000                 :::*                    LISTEN      -                   
+tcp6       0      0 :::9090                 :::*                    LISTEN      -                   
+tcp6       0      0 :::9100                 :::*                    LISTEN      -                   
+tcp6       0      0 ::1:631                 :::*                    LISTEN      -                   
+tcp6       0      0 :::22                   :::*                    LISTEN      -                   
+tcp6       0      0 :::5678                 :::*                    LISTEN      -                   
+tcp6       0      0 :::9925                 :::*                    LISTEN      -                   
+udp        0      0 0.0.0.0:41641           0.0.0.0:*                           -                   
+udp        0      0 0.0.0.0:5353            0.0.0.0:*                           -                   
+udp        0      0 0.0.0.0:38255           0.0.0.0:*                           -                   
+udp6       0      0 :::44198                :::*                                -                   
+udp6       0      0 :::44471                :::*                                -                   
+udp6       0      0 fe80::1aa4:e44f:5ff:546 :::*                                -                   
+udp6       0      0 :::41641                :::*                                -                   
+udp6       0      0 :::33518                :::*                                -                   
+udp6       0      0 :::58151                :::*                                -                   
+udp6       0      0 :::54181                :::*                                -                   
+udp6       0      0 :::5353                 :::*                                -                   

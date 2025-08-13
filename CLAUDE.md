@@ -50,7 +50,6 @@ There's a standalone Immich deployment in `./immich/docker-compose.yml` followin
 - `immich/.env` - Immich-specific environment variables
 
 **Service Configurations:**
-- `config/glance.yml` - Dashboard configuration with multiple pages (Home, Business, US, Kentucky, Sailing, SigInt, Space, Tech, Utah, Status, Config)
 - `prometheus.yml` - Prometheus scraping configuration for cAdvisor, node-exporter, and rpi-exporter
 - `Caddyfile` - Simple static file server configuration
 

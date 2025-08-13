@@ -1,0 +1,186 @@
+[ERROR|httptools_impl|L414] 2025-07-17T23:24:23: Exception in ASGI application
+Traceback (most recent call last):
+  File "/opt/mealie/lib/python3.12/site-packages/uvicorn/protocols/http/httptools_impl.py", line 409, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/mealie/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/mealie/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/opt/mealie/lib/python3.12/site-packages/starlette/applications.py", line 113, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/opt/mealie/lib/python3.12/site-packages/starlette/middleware/errors.py", line 187, in __call__
+    raise exc
+  File "/opt/mealie/lib/python3.12/site-packages/starlette/middleware/errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "/opt/mealie/lib/python3.12/site-packages/starlette/middleware/sessions.py", line 85, in __call__
+    await self.app(scope, receive, send_wrapper)
+  File "/opt/mealie/lib/python3.12/site-packages/starlette/middleware/gzip.py", line 20, in __call__
+    await responder(scope, receive, send)
+  File "/opt/mealie/lib/python3.12/site-packages/starlette/middleware/gzip.py", line 39, in __call__
+    await self.app(scope, receive, self.send_with_gzip)
+  File "/opt/mealie/lib/python3.12/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/opt/mealie/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/opt/mealie/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/opt/mealie/lib/python3.12/site-packages/starlette/routing.py", line 715, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/opt/mealie/lib/python3.12/site-packages/starlette/routing.py", line 735, in app
+    await route.handle(scope, receive, send)
+  File "/opt/mealie/lib/python3.12/site-packages/starlette/routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "/opt/mealie/lib/python3.12/site-packages/starlette/routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/opt/mealie/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/opt/mealie/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/opt/mealie/lib/python3.12/site-packages/starlette/routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/opt/mealie/lib/python3.12/site-packages/fastapi/routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/mealie/lib/python3.12/site-packages/fastapi/routing.py", line 214, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/mealie/lib/python3.12/site-packages/starlette/concurrency.py", line 39, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/mealie/lib/python3.12/site-packages/anyio/to_thread.py", line 33, in run_sync
+    return await get_asynclib().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/mealie/lib/python3.12/site-packages/anyio/_backends/_asyncio.py", line 877, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/opt/mealie/lib/python3.12/site-packages/anyio/_backends/_asyncio.py", line 807, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/mealie/lib/python3.12/site-packages/mealie/routes/app/app_about.py", line 24, in get_app_info
+    default_group = public_repos.groups.get_by_name(settings.DEFAULT_GROUP)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/mealie/lib/python3.12/site-packages/mealie/repos/repository_group.py", line 57, in get_by_name
+    return self.schema.model_validate(dbgroup)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/mealie/lib/python3.12/site-packages/pydantic/main.py", line 705, in model_validate
+    return cls.__pydantic_validator__.validate_python(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pydantic_core._pydantic_core.ValidationError: 1 validation error for GroupInDB
+webhooks
+  Error extracting attribute: OperationalError: (sqlite3.OperationalError) database is locked
+[SQL: SELECT webhook_urls.id AS webhook_urls_id, webhook_urls.group_id AS webhook_urls_group_id, webhook_urls.household_id AS webhook_urls_household_id, webhook_urls.enabled AS webhook_urls_enabled, webhook_urls.name AS webhook_urls_name, webhook_urls.url AS webhook_urls_url, webhook_urls.webhook_type AS webhook_urls_webhook_type, webhook_urls.scheduled_time AS webhook_urls_scheduled_time, webhook_urls.time AS webhook_urls_time, webhook_urls.created_at AS webhook_urls_created_at, webhook_urls.update_at AS webhook_urls_update_at 
+FROM webhook_urls 
+WHERE ? = webhook_urls.group_id]
+[parameters: ('6eb4827f419f4a009d73f91d5cd9e390',)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8) [type=get_attribute_error, input_value=<mealie.db.models.group.g...bject at 0x7ffeec12bf50>, input_type=Group]
+    For further information visit https://errors.pydantic.dev/2.11/v/get_attribute_error
+[INFO|httptools_impl|L476] 2025-07-17T23:24:55: 127.0.0.1:34846 - "GET /api/app/about HTTP/1.1" 200
+[INFO|server|L264] 2025-07-17T23:25:25: Shutting down
+[INFO|on|L67] 2025-07-17T23:25:25: Waiting for application shutdown.
+[INFO|app|L96] 2025-07-17T23:25:25: -----SYSTEM SHUTDOWN----- 
+
+[INFO|on|L76] 2025-07-17T23:25:25: Application shutdown complete.
+[INFO|server|L94] 2025-07-17T23:25:25: Finished server process [1]
+[INFO|server|L84] 2025-07-17T23:25:35: Started server process [1]
+[INFO|on|L48] 2025-07-17T23:25:35: Waiting for application startup.
+[INFO|app|L62] 2025-07-17T23:25:35: start: database initialization
+[INFO|init_db|L93] 2025-07-17T23:25:35: Database connection established.
+[INFO|migration|L211] 2025-07-17T23:25:35: Context impl SQLiteImpl.
+[INFO|migration|L214] 2025-07-17T23:25:35: Will assume non-transactional DDL.
+[INFO|app|L66] 2025-07-17T23:25:35: end: database initialization
+[INFO|app|L70] 2025-07-17T23:25:35: -----SYSTEM STARTUP-----
+[INFO|app|L71] 2025-07-17T23:25:35: ------APP SETTINGS------
+[INFO|app|L72] 2025-07-17T23:25:35: {
+    "TESTING": false,
+    "PRODUCTION": true,
+    "LOG_CONFIG_OVERRIDE": null,
+    "LOG_LEVEL": "info",
+    "theme": {
+        "light_primary": "#E58325",
+        "light_accent": "#007A99",
+        "light_secondary": "#973542",
+        "light_success": "#43A047",
+        "light_info": "#1976D2",
+        "light_warning": "#FF6D00",
+        "light_error": "#EF5350",
+        "dark_primary": "#E58325",
+        "dark_accent": "#007A99",
+        "dark_secondary": "#973542",
+        "dark_success": "#43A047",
+        "dark_info": "#1976D2",
+        "dark_warning": "#FF6D00",
+        "dark_error": "#EF5350"
+    },
+    "BASE_URL": "http://localhost:8080",
+    "STATIC_FILES": "/opt/mealie/lib/python3.12/site-packages/mealie/frontend",
+    "IS_DEMO": false,
+    "HOST_IP": "*",
+    "API_HOST": "0.0.0.0",
+    "API_PORT": 9000,
+    "API_DOCS": true,
+    "TOKEN_TIME": 48,
+    "GIT_COMMIT_HASH": "9ec15994276fb6784c59e83b92ab9a12b8c7ce8d",
+    "ALLOW_SIGNUP": false,
+    "ALLOW_PASSWORD_LOGIN": true,
+    "DAILY_SCHEDULE_TIME": "23:45",
+    "SECURITY_MAX_LOGIN_ATTEMPTS": 5,
+    "SECURITY_USER_LOCKOUT_TIME": 24,
+    "DB_ENGINE": "sqlite",
+    "DEFAULT_GROUP": "Home",
+    "DEFAULT_HOUSEHOLD": "Family",
+    "SMTP_HOST": null,
+    "SMTP_PORT": "587",
+    "SMTP_FROM_NAME": "Mealie",
+    "SMTP_FROM_EMAIL": null,
+    "SMTP_USER": null,
+    "SMTP_PASSWORD": null,
+    "SMTP_AUTH_STRATEGY": "TLS",
+    "LDAP_AUTH_ENABLED": false,
+    "LDAP_SERVER_URL": null,
+    "LDAP_TLS_INSECURE": false,
+    "LDAP_TLS_CACERTFILE": null,
+    "LDAP_ENABLE_STARTTLS": false,
+    "LDAP_BASE_DN": null,
+    "LDAP_QUERY_BIND": null,
+    "LDAP_QUERY_PASSWORD": null,
+    "LDAP_USER_FILTER": null,
+    "LDAP_ADMIN_FILTER": null,
+    "LDAP_ID_ATTRIBUTE": "uid",
+    "LDAP_MAIL_ATTRIBUTE": "mail",
+    "LDAP_NAME_ATTRIBUTE": "name",
+    "OIDC_AUTH_ENABLED": false,
+    "OIDC_CLIENT_ID": null,
+    "OIDC_CLIENT_SECRET": null,
+    "OIDC_CONFIGURATION_URL": null,
+    "OIDC_SIGNUP_ENABLED": true,
+    "OIDC_USER_GROUP": null,
+    "OIDC_ADMIN_GROUP": null,
+    "OIDC_AUTO_REDIRECT": false,
+    "OIDC_PROVIDER_NAME": "OAuth",
+    "OIDC_REMEMBER_ME": false,
+    "OIDC_USER_CLAIM": "email",
+    "OIDC_NAME_CLAIM": "name",
+    "OIDC_GROUPS_CLAIM": "groups",
+    "OIDC_SCOPES_OVERRIDE": null,
+    "OIDC_TLS_CACERTFILE": null,
+    "OPENAI_BASE_URL": null,
+    "OPENAI_API_KEY": null,
+    "OPENAI_MODEL": "gpt-4o",
+    "OPENAI_CUSTOM_HEADERS": {},
+    "OPENAI_CUSTOM_PARAMS": {},
+    "OPENAI_ENABLE_IMAGE_SERVICES": true,
+    "OPENAI_WORKERS": 2,
+    "OPENAI_SEND_DATABASE_DATA": true,
+    "OPENAI_REQUEST_TIMEOUT": 60,
+    "WORKER_PER_CORE": 1,
+    "UVICORN_WORKERS": 1,
+    "TLS_CERTIFICATE_PATH": null,
+    "TLS_PRIVATE_KEY_PATH": null
+}
+[INFO|app|L83] 2025-07-17T23:25:35: ------APP FEATURES------
+[INFO|app|L84] 2025-07-17T23:25:35: --------==SMTP==--------
+[INFO|app|L85] 2025-07-17T23:25:35: Enabled: False
+Reason: Missing required values for ['SMTP_HOST', 'SMTP_FROM_EMAIL']

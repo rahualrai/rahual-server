@@ -1,0 +1,100 @@
+[ERROR|httptools_impl|L414] 2025-07-17T23:24:06: Exception in ASGI application
+Traceback (most recent call last):
+  File "/opt/mealie/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1963, in _exec_single_context
+    self.dialect.do_execute(
+  File "/opt/mealie/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 943, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: database is locked
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/opt/mealie/lib/python3.12/site-packages/uvicorn/protocols/http/httptools_impl.py", line 409, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/mealie/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/mealie/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/opt/mealie/lib/python3.12/site-packages/starlette/applications.py", line 113, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/opt/mealie/lib/python3.12/site-packages/starlette/middleware/errors.py", line 187, in __call__
+    raise exc
+  File "/opt/mealie/lib/python3.12/site-packages/starlette/middleware/errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "/opt/mealie/lib/python3.12/site-packages/starlette/middleware/sessions.py", line 85, in __call__
+    await self.app(scope, receive, send_wrapper)
+  File "/opt/mealie/lib/python3.12/site-packages/starlette/middleware/gzip.py", line 20, in __call__
+    await responder(scope, receive, send)
+  File "/opt/mealie/lib/python3.12/site-packages/starlette/middleware/gzip.py", line 39, in __call__
+    await self.app(scope, receive, self.send_with_gzip)
+  File "/opt/mealie/lib/python3.12/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/opt/mealie/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/opt/mealie/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/opt/mealie/lib/python3.12/site-packages/starlette/routing.py", line 715, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/opt/mealie/lib/python3.12/site-packages/starlette/routing.py", line 735, in app
+    await route.handle(scope, receive, send)
+  File "/opt/mealie/lib/python3.12/site-packages/starlette/routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "/opt/mealie/lib/python3.12/site-packages/starlette/routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/opt/mealie/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/opt/mealie/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/opt/mealie/lib/python3.12/site-packages/starlette/routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/opt/mealie/lib/python3.12/site-packages/fastapi/routing.py", line 291, in app
+    solved_result = await solve_dependencies(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/mealie/lib/python3.12/site-packages/fastapi/dependencies/utils.py", line 638, in solve_dependencies
+    solved = await call(**solved_result.values)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/mealie/lib/python3.12/site-packages/mealie/core/dependencies/dependencies.py", line 116, in get_current_user
+    user = repos.users.get_one(token_data.user_id, "id", any_case=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/mealie/lib/python3.12/site-packages/mealie/repos/repository_generic.py", line 162, in get_one
+    result = self.session.execute(q).unique().scalars().one_or_none()
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/mealie/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2365, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/mealie/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2251, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/mealie/lib/python3.12/site-packages/sqlalchemy/orm/context.py", line 306, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "/opt/mealie/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1415, in execute
+    return meth(
+           ^^^^^
+  File "/opt/mealie/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 523, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/mealie/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1637, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/mealie/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1842, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/mealie/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1982, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/opt/mealie/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2351, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/opt/mealie/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1963, in _exec_single_context
+    self.dialect.do_execute(
+  File "/opt/mealie/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 943, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) database is locked
+[SQL: SELECT users.id, users.full_name, users.username, users.email, users.password, users.auth_method, users.admin, users.advanced, users.group_id, users.household_id, users.cache_key, users.login_attemps, users.locked_at, users.can_manage_household, users.can_manage, users.can_invite, users.can_organize, users.owned_recipes_id, users.created_at, users.update_at, groups_1.id AS id_1, groups_1.name, groups_1.slug, groups_1.created_at AS created_at_1, groups_1.update_at AS update_at_1, households_1.id AS id_2, households_1.name AS name_1, households_1.slug AS slug_1, households_1.group_id AS group_id_1, households_1.created_at AS created_at_2, households_1.update_at AS update_at_2, long_live_tokens_1.name AS name_2, long_live_tokens_1.token, long_live_tokens_1.user_id, long_live_tokens_1.id AS id_3, long_live_tokens_1.created_at AS created_at_3, long_live_tokens_1.update_at AS update_at_3 
+FROM users LEFT OUTER JOIN groups AS groups_1 ON groups_1.id = users.group_id LEFT OUTER JOIN households AS households_1 ON households_1.id = users.household_id LEFT OUTER JOIN long_live_tokens AS long_live_tokens_1 ON users.id = long_live_tokens_1.user_id 
+WHERE users.id = ?]
+[parameters: ('a47579e793ee45f797127fc9ce34e73f',)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+[INFO|httptools_impl|L476] 2025-07-17T23:24:23: 127.0.0.1:58220 - "GET /api/app/about HTTP/1.1" 500
