@@ -1,4 +1,12 @@
 :80 {
-  root * /srv
+  root * /usr/share/caddy
+  
+  # Handle clean URLs - serve HTML files without .html extension
+  @htmlFiles {
+    file {path}.html
+    not path *.html
+  }
+  rewrite @htmlFiles {path}.html
+  
   file_server
 }
