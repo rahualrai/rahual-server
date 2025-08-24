@@ -3,10 +3,12 @@ services:
 
   web:
     image: caddy:latest
+    container_name: web
+    restart: unless-stopped
     ports:
       - "3000:80"
     volumes:
-      - ./site:/srv
+      - ./site:/usr/share/caddy
       - ./Caddyfile:/etc/caddy/Caddyfile
 
   vaultwarden:
