@@ -10,6 +10,8 @@
 /postgres/
 /site/
 /files/
+/n8n-data/
+/mealie/
 
 # Cloudflared creds
 *.json
