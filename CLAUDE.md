@@ -13,7 +13,7 @@ This is a self-hosted infrastructure stack for home lab services. The repository
 The main stack is orchestrated via `docker-compose.yml` and includes:
 
 **Web & Reverse Proxy:**
-- Caddy (`web` service) - Web server serving static content from `./site` on port 3000
+- Caddy (`web` service) - Web server serving static content from `./site` on port 3000, with clean URL rewriting for HTML files
 
 **Infrastructure Services:**
 - Vaultwarden - Password manager (port 3010)
@@ -50,7 +50,8 @@ There's a standalone Immich deployment in `./immich/docker-compose.yml` followin
 
 **Service Configurations:**
 - `prometheus.yml` - Prometheus scraping configuration for cAdvisor, node-exporter, and rpi-exporter
-- `Caddyfile` - Simple static file server configuration
+- `Caddyfile` - Web server configuration with clean URL rewriting and proper file serving
+- `site/` - Static website files including modern academic website with component architecture
 
 ## Common Development Commands
 
@@ -183,3 +184,17 @@ sudo systemctl disable cloudflared
 - Test configuration changes in development environment before production deployment
 - Monitor resource usage as this stack can be resource-intensive with all services running
 - Cloudflare Tunnel provides secure external access without exposing local ports directly
+
+## Git Configuration
+
+Git is configured with credential storage for seamless authentication:
+- Credentials stored in `~/.git-credentials` 
+- Global user configuration set for the repository
+- Automatic authentication for push/pull operations
+
+## Recent Infrastructure Changes
+
+- **Mailcow Removal**: All mail services (mailserver, roundcube, mailcow-mysql, mailcow-redis) have been completely removed
+- **Website Upgrade**: Site upgraded from simple HTML to modern academic website with component architecture
+- **Docker Cleanup**: Regular cleanup maintains optimal resource usage (~3.2GB reclaimed)
+- **Configuration Updates**: Caddyfile enhanced with clean URL rewriting, gitignore updated for current services
