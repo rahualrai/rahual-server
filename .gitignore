@@ -12,6 +12,7 @@
 /files/
 /n8n-data/
 /mealie/
+/uptime-kuma-data/
 
 # Cloudflared creds
 *.json

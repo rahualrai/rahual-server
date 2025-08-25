@@ -37,6 +37,9 @@ The main stack is orchestrated via `docker-compose.yml` and includes:
 - N8N - Workflow automation (port 5678)
 - Mealie - Recipe management (port 9925) with dedicated PostgreSQL
 
+**Monitoring & Management:**
+- Uptime Kuma - Service uptime monitoring (port 3020)
+
 ### Separate Immich Stack
 
 There's a standalone Immich deployment in `./immich/docker-compose.yml` following the official Immich installation pattern. This appears to be a reference/backup configuration.
@@ -130,6 +133,7 @@ docker-compose pull && docker-compose up -d
 | Immich | 2283 | Photo management |
 | N8N | 5678 | Workflow automation |
 | Mealie | 9925 | Recipe management |
+| Uptime Kuma | 3020 | Service monitoring |
 
 ## Security Considerations
 
@@ -157,6 +161,7 @@ The server uses Cloudflare Tunnel for secure external access to services. Config
 - `photos.rahual.com` → Immich (localhost:2283)
 - `n8n.rahual.com` → N8N (localhost:5678)
 - `meal.rahual.com` → Mealie (localhost:9925)
+- `status.rahual.com` → Uptime Kuma (localhost:3020)
 
 **Cloudflared Service Management:**
 ```bash
