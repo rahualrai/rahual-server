@@ -2,33 +2,34 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Section from '../components/Section.astro';
+import Icon from '../components/Icon.astro';
 
-// Academic profile data
+// Rahual Rai's academic profile data
 const profileData = {
-  name: "Your Name",
-  title: "Undergraduate Student | Aspiring PhD Candidate", 
-  subtitle: "Passionate about research and academic excellence",
+  name: "Rahual Rai",
+  title: "Computer Science & Mathematics Student | Aspiring PhD Candidate", 
+  subtitle: "Howard University • 4.0 GPA • Research Focus: AI/ML & Computer Vision",
   socialLinks: [
     {
       platform: "github" as const,
-      url: "https://github.com/yourusername",
+      url: "https://github.com/rahualrai", // Update with actual GitHub username
       label: "View GitHub profile"
     },
     {
       platform: "linkedin" as const,
-      url: "https://linkedin.com/in/yourusername", 
+      url: "https://linkedin.com/in/rahual-rai", // Update with actual LinkedIn profile
       label: "Connect on LinkedIn"
     },
     {
       platform: "email" as const,
-      url: "mailto:your.email@university.edu",
+      url: "mailto:rahual.rai@bison.howard.edu",
       label: "Send email"
     }
   ]
 };
 ---
 
-<Layout title="Academic CV - Your Name">
+<Layout title="Rahual Rai - Academic CV" description="Computer Science & Mathematics student at Howard University with research focus on AI/ML and Computer Vision. Perfect 4.0 GPA with publications and industry experience." author="Rahual Rai">
   <Header 
     name={profileData.name}
     title={profileData.title}
@@ -38,61 +39,134 @@ const profileData = {
   
   <main id="main-content">
     <Section title="About" id="about">
-      <p>I am a senior undergraduate student pursuing opportunities in graduate research. My academic interests focus on [Your Research Area]. This portfolio showcases my journey in academia, research experiences, and aspirations for doctoral studies.</p>
+      <p>I am a Computer Science and Mathematics double major at Howard University with a perfect 4.0 GPA, graduating in May 2026. My research spans artificial intelligence applications in health informatics, computer vision for environmental monitoring, and cybersecurity in critical infrastructure systems.</p>
       
-      <p>Currently, I am exploring opportunities to contribute to meaningful research while developing the skills necessary for advanced academic work. I am particularly interested in [Specific Research Topics] and their applications in [Field/Industry].</p>
+      <p>Currently pursuing research opportunities that combine machine learning with real-world impact, I have published peer-reviewed work and am preparing for doctoral studies. My interdisciplinary approach leverages both computational rigor and mathematical foundations to address complex societal challenges.</p>
+      
+      <div class="cv-download">
+        <a href="/cv.pdf" download class="cv-link">
+          <Icon name="download" size="sm" aria-hidden="true" />
+          Download Full CV
+        </a>
+      </div>
     </Section>
 
     <Section title="Education" id="education">
       <div class="education-item">
-        <h3>Bachelor of Science in [Your Major]</h3>
-        <p class="text-muted">University Name • Expected [Year]</p>
-        <p>Relevant coursework: [List key courses related to your research interests]</p>
-        <p>GPA: [Your GPA] • Dean's List: [Semesters if applicable]</p>
+        <h3>Bachelor of Science in Computer Science and Mathematics</h3>
+        <p class="text-muted">Howard University • Expected May 2026</p>
+        <p><strong>GPA: 4.0/4.0</strong></p>
+        <p>Dean's List: Fall 2023, Spring 2024, Fall 2024, Spring 2025</p>
+        <p>Relevant coursework: Machine Learning, Computer Vision, Data Structures & Algorithms, Linear Algebra, Statistics, Discrete Mathematics</p>
       </div>
     </Section>
 
-    <Section title="Research Interests" id="research">
-      <ul>
-        <li>[Primary Research Area] - Brief description of your interest and any experience</li>
-        <li>[Secondary Research Area] - What specifically interests you about this field</li>
-        <li>[Third Research Area] - Connection to your academic and career goals</li>
-      </ul>
-      
-      <p>My research interests are driven by [what motivates your research]. I am particularly excited about the potential applications in [specific applications or impact areas].</p>
-    </Section>
-
-    <Section title="Projects & Coursework" id="projects">
+    <Section title="Research Experience" id="research">
       <div class="project-item">
-        <h3>[Project Title]</h3>
-        <p class="text-muted">[Course Name or Independent Study] • [Semester/Year]</p>
-        <p>Brief description of the project, methodologies used, and key findings or outcomes. Highlight any research skills developed.</p>
+        <h3>Princeton Alliance for Collaborative Research and Innovation</h3>
+        <p class="text-muted">Research Assistant • Aug 2024 - Present</p>
+        <p><em>Supervisors: Dr. Janet Curie, Dr. Meirong Liu, Dr. Jiang Li • Princeton University</em></p>
+        <p>Developed LLM-based survey and interview system for conducting health research in underserved communities in Washington DC. Implemented automated data collection pipeline targeting urban minority asthmatic children living in public housing. Coordinated community engagement protocols to improve response rates and data quality in low-income populations.</p>
       </div>
       
       <div class="project-item">
-        <h3>[Another Project Title]</h3>
-        <p class="text-muted">[Context] • [Timeframe]</p>
-        <p>Description focusing on academic rigor, problem-solving approaches, and relevance to your research interests.</p>
+        <h3>Mangrove Monitoring - Engineers for Exploration</h3>
+        <p class="text-muted">Research Assistant • Jan 2024 - Dec 2024</p>
+        <p><em>Supervisor: Dr. Ryan Kastner • UC San Diego</em></p>
+        <p>Developed computer vision models for satellite super-resolution, achieving state-of-the-art performance in multispectral imagery enhancement. Improved landmass classification accuracy and precision by 15% while reducing model size by 75% through architectural optimization. Pioneered novel diffusion model architecture for multispectral satellite super-resolution and built web infrastructure for deploying monitoring tools to research communities.</p>
+      </div>
+      
+      <div class="project-item">
+        <h3>Energy Supply Chain Cybersecurity</h3>
+        <p class="text-muted">Research Assistant • May 2023 - Dec 2023</p>
+        <p><em>Supervisors: Dr. Jiang Li, Ryan Cryar • National Renewable Energy Laboratory</em></p>
+        <p>Designed comprehensive security analysis framework integrating Software Bill of Materials (SBOMs), vulnerability databases, and Vulnerability Exploitability eXchange (VEX) technologies for critical energy infrastructure protection.</p>
       </div>
     </Section>
 
-    <Section title="Skills & Competencies" id="skills">
+    <Section title="Industry Experience" id="industry">
+      <div class="project-item">
+        <h3>Software Engineering Intern - Programming Systems</h3>
+        <p class="text-muted">Uber, NYC • May 2025 - Aug 2025 (Upcoming)</p>
+        <p><em>Supervisors: Dr. Shauvik Roy Choudhary, Dr. Peng Liu</em></p>
+        <p>Developing automated agent for small-to-medium-scale bug fixes with 50% cost reduction compared to commercial alternatives. Optimizing agent performance to run 30% faster while maintaining accuracy of bug fix solutions.</p>
+      </div>
+    </Section>
+
+    <Section title="Publications" id="publications">
+      <div class="project-item">
+        <h3>Using large language models to conduct interviews with public housing stakeholders for urban minority asthmatic children</h3>
+        <p class="text-muted">Submitted to AMIA Symposium • 2025</p>
+        <p><em>Rai, Rahual, M. Liu, A. Panthi, et al.</em></p>
+      </div>
+      
+      <div class="project-item">
+        <h3>Analysing loneliness forum posts, the comments they elicit, and the responses to these comments</h3>
+        <p class="text-muted">PLOS Mental Health • 2024</p>
+        <p><em>Rai, Rahual, P. Michaels, N. Tonge, et al.</em></p>
+        <p>DOI: 10.1371/journal.pmen.0000037</p>
+      </div>
+      
+      <div class="project-item">
+        <h3>Fact-checked claim retrieval: Combining zero-shot claim extraction and knn-based classification</h3>
+        <p class="text-muted">Poster submitted to Amazon-HBCU AI/ML Symposium • 2025</p>
+        <p><em>Rai, Rahual and S. Rijal</em></p>
+      </div>
+    </Section>
+
+    <Section title="Honors & Awards" id="awards">
+      <div class="awards-grid">
+        <div class="award-item">
+          <h4>Tau Beta Pi Scholarship</h4>
+          <p class="text-muted">2025</p>
+        </div>
+        <div class="award-item">
+          <h4>Google TechX Scholar</h4>
+          <p class="text-muted">2024</p>
+        </div>
+        <div class="award-item">
+          <h4>Goldman Sachs Market Madness Scholar</h4>
+          <p class="text-muted">2024</p>
+        </div>
+        <div class="award-item">
+          <h4>Google Generation Scholarship</h4>
+          <p class="text-muted">2023</p>
+        </div>
+        <div class="award-item">
+          <h4>DEFCON 31 SEEDAI Sponsorship</h4>
+          <p class="text-muted">2023</p>
+        </div>
+      </div>
+    </Section>
+
+    <Section title="Technical Skills" id="skills">
       <div class="skills-grid">
         <div class="skill-category">
-          <h3>Technical Skills</h3>
-          <p>[Programming languages, software tools, laboratory techniques, etc.]</p>
+          <h3>Programming Languages</h3>
+          <p>Python, C/C++</p>
         </div>
         
         <div class="skill-category">
-          <h3>Research Methods</h3>
-          <p>[Data analysis, literature review, experimental design, statistical analysis, etc.]</p>
+          <h3>Machine Learning Tools</h3>
+          <p>PyTorch, TensorFlow, Sklearn, Pandas, NumPy</p>
         </div>
         
         <div class="skill-category">
-          <h3>Academic Skills</h3>
-          <p>[Academic writing, presentation, peer review, project management, etc.]</p>
+          <h3>Research Areas</h3>
+          <p>Computer Vision, Natural Language Processing, Health Informatics, Cybersecurity, Environmental Monitoring</p>
         </div>
       </div>
+    </Section>
+
+    <Section title="Research Interests" id="interests">
+      <ul>
+        <li><strong>AI/ML for Health Informatics</strong> - Developing LLM-based systems for community health research and improving healthcare access in underserved populations</li>
+        <li><strong>Computer Vision for Environmental Monitoring</strong> - Creating advanced satellite imagery analysis systems for climate and conservation research</li>
+        <li><strong>Cybersecurity in Critical Infrastructure</strong> - Designing security frameworks for energy systems and supply chain vulnerability analysis</li>
+        <li><strong>Interdisciplinary AI Applications</strong> - Exploring computational solutions to complex societal challenges through mathematical rigor and algorithmic innovation</li>
+      </ul>
+      
+      <p>My research is driven by a commitment to leveraging artificial intelligence for positive societal impact. I am particularly excited about the intersection of machine learning, public health, and environmental sustainability, where computational approaches can address pressing global challenges.</p>
     </Section>
   </main>
 </Layout>
@@ -119,6 +193,43 @@ const profileData = {
     margin-bottom: var(--space-2);
   }
   
+  .project-item h4 {
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-medium);
+    color: var(--text-primary);
+    margin-bottom: var(--space-1);
+  }
+  
+  .cv-download {
+    margin-top: var(--space-6);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--border-secondary);
+  }
+  
+  .cv-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-4);
+    background-color: var(--surface-secondary);
+    border: 1px solid var(--border-primary);
+    border-radius: var(--radius-base);
+    text-decoration: none;
+    color: var(--text-primary);
+    font-weight: var(--font-weight-medium);
+    transition: all var(--duration-base) var(--ease-out);
+  }
+  
+  .cv-link:hover {
+    background-color: var(--surface-tertiary);
+    transform: translateY(-1px);
+  }
+  
+  .cv-link:focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 2px;
+  }
+  
   .skills-grid {
     display: grid;
     gap: var(--space-6);
@@ -131,10 +242,43 @@ const profileData = {
     margin-bottom: var(--space-2);
   }
   
-  /* Responsive skills grid */
+  .awards-grid {
+    display: grid;
+    gap: var(--space-4);
+  }
+  
+  .award-item {
+    padding: var(--space-3);
+    background-color: var(--surface-secondary);
+    border-radius: var(--radius-base);
+    border: 1px solid var(--border-secondary);
+  }
+  
+  .award-item h4 {
+    font-size: var(--text-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    margin-bottom: var(--space-1);
+  }
+  
+  .award-item .text-muted {
+    font-size: var(--text-xs);
+  }
+  
+  /* Responsive grids */
+  @media (min-width: 640px) {
+    .awards-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
   @media (min-width: 768px) {
     .skills-grid {
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+    
+    .awards-grid {
+      grid-template-columns: repeat(3, 1fr);
     }
   }
   
@@ -144,6 +288,21 @@ const profileData = {
     .project-item {
       page-break-inside: avoid;
       margin-bottom: var(--space-4);
+    }
+    
+    .cv-download {
+      display: none;
+    }
+    
+    .awards-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-2);
+    }
+    
+    .award-item {
+      background-color: transparent;
+      border: 1px solid var(--border-primary);
+      padding: var(--space-2);
     }
   }
 </style>
