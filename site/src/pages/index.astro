@@ -1,16 +1,36 @@
 ---
-
+import Layout from '../layouts/Layout.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title="Academic CV - Your Name">
+  <div class="section">
+    <h1>Your Name</h1>
+    <p class="subtitle">Undergraduate Student | Aspiring PhD Candidate</p>
+    <p>Welcome to my academic portfolio. This site showcases my research interests, projects, and academic journey.</p>
+  </div>
+  
+  <hr />
+  
+  <div class="section">
+    <h2>About</h2>
+    <p>I am a senior undergraduate student pursuing opportunities in graduate research. My academic interests focus on [Your Research Area].</p>
+  </div>
+
+  <div class="section">
+    <h2>Education</h2>
+    <p>Details about your educational background will go here.</p>
+  </div>
+
+  <div class="section">
+    <h2>Research Interests</h2>
+    <p>Your research interests and areas of focus.</p>
+  </div>
+</Layout>
+
+<style>
+  .subtitle {
+    font-size: var(--text-xl);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-6);
+  }
+</style>
