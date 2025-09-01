@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://hi.rahual.com/sitemap-index.xml
