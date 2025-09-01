@@ -14,27 +14,66 @@ const { title, description = "Academic CV and Research Portfolio", author = "You
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
     <meta name="author" content={author} />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
+    
+    <!-- Performance optimizations -->
+    <meta name="theme-color" content="#0a0a0a" />
+    <meta name="color-scheme" content="dark" />
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
+    <meta property="og:site_name" content="Rahual Rai - Academic CV" />
+    <meta property="og:locale" content="en_US" />
     
     <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:title" content={title} />
-    <meta property="twitter:description" content={description} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:creator" content="@rahualrai" />
     
-    <!-- Google Fonts - Inter for clean academic look -->
+    <!-- Academic structured data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Rahual Rai",
+      "jobTitle": "Computer Science & Mathematics Student",
+      "affiliation": {
+        "@type": "EducationalOrganization",
+        "name": "Howard University"
+      },
+      "email": "rahual.rai@bison.howard.edu",
+      "description": "Computer Science and Mathematics student at Howard University with research focus on AI/ML and Computer Vision. Perfect 4.0 GPA with publications and industry experience.",
+      "knowsAbout": ["Artificial Intelligence", "Machine Learning", "Computer Vision", "Cybersecurity", "Health Informatics"],
+      "alumniOf": {
+        "@type": "EducationalOrganization",
+        "name": "Howard University"
+      }
+    }
+    </script>
+    
+    <!-- Google Fonts - optimized loading -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
+      media="print" 
+      onload="this.media='all'"
     />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="/cv.pdf" as="document" />
     
     <title>{title}</title>
   </head>

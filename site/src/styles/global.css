@@ -2,6 +2,8 @@
 @import './reset.css';
 @import './design-system.css';
 @import './utilities.css';
+@import './responsive.css';
+@import './performance.css';
 
 /* Base element styles using design system */
 html {

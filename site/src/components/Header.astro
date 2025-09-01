@@ -111,8 +111,61 @@ const {
     top: 6px;
   }
   
-  /* Responsive design */
-  @media (min-width: 768px) {
+  /* Mobile-first responsive design */
+  @media (max-width: 47.99rem) {
+    .site-header {
+      margin-bottom: var(--space-8);
+      padding: var(--space-6) 0;
+      text-align: center;
+    }
+    
+    .header-content {
+      align-items: center;
+    }
+    
+    .header-name {
+      font-size: var(--text-3xl);
+      margin-bottom: var(--space-2);
+    }
+    
+    .header-title {
+      font-size: var(--text-lg);
+      margin-bottom: var(--space-2);
+    }
+    
+    .header-subtitle {
+      font-size: var(--text-base);
+    }
+    
+    .header-social {
+      align-self: center;
+      justify-content: center;
+    }
+  }
+  
+  /* Tablet responsive design */
+  @media (min-width: 48rem) and (max-width: 63.99rem) {
+    .site-header {
+      padding: var(--space-10) 0;
+    }
+    
+    .header-content {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .header-name {
+      font-size: var(--text-4xl);
+    }
+    
+    .header-social {
+      align-self: center;
+    }
+  }
+  
+  /* Desktop responsive design */
+  @media (min-width: 64rem) {
     .site-header {
       padding: var(--space-12) 0;
     }

@@ -1,0 +1,236 @@
+/* Performance Optimizations for Core Web Vitals */
+
+/* === CRITICAL RENDERING PATH OPTIMIZATIONS === */
+
+/* Prevent layout shifts with proper sizing */
+img, video, iframe {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Optimize font loading to prevent FOIT/FOUT */
+@font-face {
+  font-family: 'Inter';
+  font-display: swap; /* Fallback font shows immediately, then swap */
+}
+
+/* Critical above-the-fold styles */
+body {
+  /* Prevent layout shifts during font load */
+  font-family: var(--font-family-primary), system-ui, -apple-system, sans-serif;
+}
+
+/* === CONTENT LOADING OPTIMIZATIONS === */
+
+/* Optimize critical content visibility */
+.container {
+  /* Prevent content jumping during load */
+  min-height: 100vh;
+}
+
+/* Smooth loading states */
+.loading {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.loaded {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* === INTERACTION OPTIMIZATIONS === */
+
+/* Optimize button and link interactions */
+.cv-link,
+.social-link {
+  /* Prevent layout shifts on hover */
+  transform: translateZ(0); /* Create stacking context */
+  backface-visibility: hidden; /* Optimize animations */
+}
+
+/* Optimize focus indicators */
+*:focus-visible {
+  /* Use outline instead of box-shadow for better performance */
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+/* === SCROLL PERFORMANCE === */
+
+/* Optimize scrolling performance */
+* {
+  /* Use hardware acceleration for transforms */
+  will-change: auto;
+}
+
+/* Only apply will-change to actively animating elements */
+.animating {
+  will-change: transform;
+}
+
+.animation-complete {
+  will-change: auto;
+}
+
+/* === GPU ACCELERATION FOR ANIMATIONS === */
+
+/* Hardware-accelerate common animations */
+.social-link:hover,
+.cv-link:hover,
+.project-item:hover,
+.education-item:hover {
+  /* Use transform instead of changing other properties */
+  transform: translateY(-1px) translateZ(0);
+}
+
+/* === REDUCE PAINT COMPLEXITY === */
+
+/* Optimize backgrounds */
+.award-item,
+.skill-category {
+  /* Use transform for position changes instead of layout properties */
+  contain: layout style paint;
+}
+
+/* === OPTIMIZE IMAGES === */
+
+/* Image loading optimization */
+img {
+  /* Lazy load images by default */
+  loading: lazy;
+  /* Decode images asynchronously */
+  decoding: async;
+}
+
+/* Critical images (like profile pictures) should load immediately */
+.critical-image {
+  loading: eager;
+}
+
+/* === VIEWPORT META OPTIMIZATION === */
+
+/* Ensure proper mobile viewport handling */
+@viewport {
+  width: device-width;
+  zoom: 1.0;
+}
+
+/* === REDUCE REFLOWS === */
+
+/* Prevent layout thrashing */
+.section,
+.project-item,
+.education-item {
+  /* Contain layout to prevent document reflows */
+  contain: layout;
+}
+
+/* === OPTIMIZE TYPOGRAPHY === */
+
+/* Optimize text rendering */
+body {
+  /* Optimize text rendering for performance */
+  text-rendering: optimizeSpeed;
+  /* Use subpixel antialiasing on supported displays */
+  -webkit-font-smoothing: subpixel-antialiased;
+}
+
+/* For retina displays, use antialiasing */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* === OPTIMIZE ANIMATIONS === */
+
+/* Use efficient animations */
+@keyframes slideIn {
+  from {
+    transform: translateY(20px) translateZ(0);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) translateZ(0);
+    opacity: 1;
+  }
+}
+
+/* Apply animations only when they add value */
+.animate-on-scroll {
+  animation: slideIn 0.6s ease-out;
+}
+
+/* === REDUCE BLOCKING RESOURCES === */
+
+/* Critical CSS inlining - these styles should be inlined in HTML head */
+.critical {
+  /* Critical above-the-fold styles */
+  display: block;
+  visibility: visible;
+}
+
+/* === OPTIMIZE FOR CORE WEB VITALS === */
+
+/* LCP (Largest Contentful Paint) optimizations */
+.hero-content {
+  /* Ensure hero content loads quickly */
+  contain: layout style;
+}
+
+/* CLS (Cumulative Layout Shift) prevention */
+.dynamic-content {
+  /* Reserve space for dynamic content */
+  min-height: 200px; /* Adjust based on expected content height */
+}
+
+/* FID (First Input Delay) optimizations */
+.interactive-element {
+  /* Optimize interactive elements */
+  touch-action: manipulation; /* Disable double-tap zoom delay */
+}
+
+/* === PRINT PERFORMANCE === */
+
+@media print {
+  /* Optimize for print performance */
+  * {
+    /* Remove animations and transitions for print */
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+  
+  /* Optimize colors for print */
+  background: transparent !important;
+  color: black !important;
+}
+
+/* === ACCESSIBILITY PERFORMANCE === */
+
+/* Respect user preferences for performance */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    /* Remove all animations and transitions */
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* High contrast mode optimizations */
+@media (prefers-contrast: high) {
+  /* Simplify visual effects for better performance in high contrast */
+  .award-item,
+  .cv-link {
+    background: transparent;
+    border: 2px solid currentColor;
+  }
+}
