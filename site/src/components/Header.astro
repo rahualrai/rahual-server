@@ -41,11 +41,6 @@ const {
       </div>
     )}
   </div>
-  
-  <!-- Skip to main content link for accessibility -->
-  <a href="#main-content" class="skip-link">
-    Skip to main content
-  </a>
 </header>
 
 <style>
@@ -92,24 +87,6 @@ const {
     align-self: flex-start;
   }
   
-  /* Skip link for accessibility */
-  .skip-link {
-    position: absolute;
-    top: -40px;
-    left: 6px;
-    background: var(--surface-primary);
-    color: var(--text-primary);
-    padding: var(--space-2) var(--space-4);
-    text-decoration: none;
-    border-radius: var(--radius-base);
-    border: 2px solid var(--focus-ring);
-    z-index: 1000;
-    transition: top var(--duration-base) var(--ease-out);
-  }
-  
-  .skip-link:focus {
-    top: 6px;
-  }
   
   /* Mobile-first responsive design */
   @media (max-width: 47.99rem) {
@@ -204,10 +181,6 @@ const {
     
     .header-subtitle {
       color: var(--text-inverse);
-    }
-    
-    .skip-link {
-      display: none;
     }
   }
 </style>
