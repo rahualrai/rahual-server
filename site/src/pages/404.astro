@@ -1,0 +1,174 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Section from '../components/Section.astro';
+import Icon from '../components/Icon.astro';
+---
+
+<Layout 
+  title="Page Not Found - Rahual Rai" 
+  description="The page you're looking for doesn't exist. Return to Rahual Rai's academic portfolio."
+  author="Rahual Rai"
+>
+  <Header 
+    name="404"
+    title="Page Not Found"
+    subtitle="The page you're looking for doesn't exist"
+  />
+  
+  <main id="main-content">
+    <Section title="What happened?" id="error-info">
+      <p>The page you're looking for might have been moved, deleted, or you may have entered an incorrect URL.</p>
+      
+      <div class="error-actions">
+        <a href="/" class="error-link primary">
+          <Icon name="arrow-up" size="sm" aria-hidden="true" />
+          Return to Homepage
+        </a>
+        
+        <a href="/cv.pdf" class="error-link secondary" download>
+          <Icon name="download" size="sm" aria-hidden="true" />
+          Download CV
+        </a>
+      </div>
+    </Section>
+
+    <Section title="Quick Links" id="quick-links">
+      <div class="quick-links-grid">
+        <div class="quick-link-item">
+          <h3>Research Experience</h3>
+          <p>Princeton, UC San Diego, and NREL research projects</p>
+          <a href="/#research" class="link-arrow">View Research →</a>
+        </div>
+        
+        <div class="quick-link-item">
+          <h3>Publications</h3>
+          <p>PLOS Mental Health, AMIA submissions, and more</p>
+          <a href="/#publications" class="link-arrow">View Publications →</a>
+        </div>
+        
+        <div class="quick-link-item">
+          <h3>Technical Skills</h3>
+          <p>AI/ML, Computer Vision, Python, C++</p>
+          <a href="/#skills" class="link-arrow">View Skills →</a>
+        </div>
+      </div>
+    </Section>
+  </main>
+</Layout>
+
+<style>
+  .error-actions {
+    display: flex;
+    gap: var(--space-4);
+    margin-top: var(--space-6);
+    flex-wrap: wrap;
+  }
+  
+  .error-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-4);
+    border-radius: var(--radius-base);
+    text-decoration: none;
+    font-weight: var(--font-weight-medium);
+    transition: all var(--duration-base) var(--ease-out);
+  }
+  
+  .error-link.primary {
+    background-color: var(--surface-secondary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-primary);
+  }
+  
+  .error-link.primary:hover {
+    background-color: var(--surface-tertiary);
+    transform: translateY(-1px);
+  }
+  
+  .error-link.secondary {
+    color: var(--text-body);
+    border: 1px solid var(--border-secondary);
+  }
+  
+  .error-link.secondary:hover {
+    color: var(--text-primary);
+    border-color: var(--border-primary);
+    background-color: var(--surface-secondary);
+  }
+  
+  .quick-links-grid {
+    display: grid;
+    gap: var(--space-6);
+    margin-top: var(--space-4);
+  }
+  
+  .quick-link-item {
+    padding: var(--space-4);
+    background-color: var(--surface-secondary);
+    border: 1px solid var(--border-secondary);
+    border-radius: var(--radius-base);
+    transition: all var(--duration-base) var(--ease-out);
+  }
+  
+  .quick-link-item:hover {
+    background-color: var(--surface-tertiary);
+    transform: translateY(-2px);
+  }
+  
+  .quick-link-item h3 {
+    font-size: var(--text-lg);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    margin-bottom: var(--space-2);
+  }
+  
+  .quick-link-item p {
+    color: var(--text-body);
+    margin-bottom: var(--space-3);
+    font-size: var(--text-sm);
+  }
+  
+  .link-arrow {
+    color: var(--interactive-primary);
+    text-decoration: none;
+    font-weight: var(--font-weight-medium);
+    font-size: var(--text-sm);
+    transition: color var(--duration-base) var(--ease-out);
+  }
+  
+  .link-arrow:hover {
+    color: var(--interactive-hover);
+  }
+  
+  /* Responsive design */
+  @media (min-width: 36rem) {
+    .error-actions {
+      justify-content: center;
+    }
+  }
+  
+  @media (min-width: 48rem) {
+    .quick-links-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  /* Print styles */
+  @media print {
+    .error-actions {
+      display: none;
+    }
+    
+    .quick-links-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-4);
+    }
+    
+    .quick-link-item {
+      background: transparent;
+      border: 1px solid var(--border-primary);
+    }
+  }
+</style>
