@@ -1,36 +1,149 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Section from '../components/Section.astro';
+
+// Academic profile data
+const profileData = {
+  name: "Your Name",
+  title: "Undergraduate Student | Aspiring PhD Candidate", 
+  subtitle: "Passionate about research and academic excellence",
+  socialLinks: [
+    {
+      platform: "github" as const,
+      url: "https://github.com/yourusername",
+      label: "View GitHub profile"
+    },
+    {
+      platform: "linkedin" as const,
+      url: "https://linkedin.com/in/yourusername", 
+      label: "Connect on LinkedIn"
+    },
+    {
+      platform: "email" as const,
+      url: "mailto:your.email@university.edu",
+      label: "Send email"
+    }
+  ]
+};
 ---
 
 <Layout title="Academic CV - Your Name">
-  <div class="section">
-    <h1>Your Name</h1>
-    <p class="subtitle">Undergraduate Student | Aspiring PhD Candidate</p>
-    <p>Welcome to my academic portfolio. This site showcases my research interests, projects, and academic journey.</p>
-  </div>
+  <Header 
+    name={profileData.name}
+    title={profileData.title}
+    subtitle={profileData.subtitle}
+    socialLinks={profileData.socialLinks}
+  />
   
-  <hr />
-  
-  <div class="section">
-    <h2>About</h2>
-    <p>I am a senior undergraduate student pursuing opportunities in graduate research. My academic interests focus on [Your Research Area].</p>
-  </div>
+  <main id="main-content">
+    <Section title="About" id="about">
+      <p>I am a senior undergraduate student pursuing opportunities in graduate research. My academic interests focus on [Your Research Area]. This portfolio showcases my journey in academia, research experiences, and aspirations for doctoral studies.</p>
+      
+      <p>Currently, I am exploring opportunities to contribute to meaningful research while developing the skills necessary for advanced academic work. I am particularly interested in [Specific Research Topics] and their applications in [Field/Industry].</p>
+    </Section>
 
-  <div class="section">
-    <h2>Education</h2>
-    <p>Details about your educational background will go here.</p>
-  </div>
+    <Section title="Education" id="education">
+      <div class="education-item">
+        <h3>Bachelor of Science in [Your Major]</h3>
+        <p class="text-muted">University Name • Expected [Year]</p>
+        <p>Relevant coursework: [List key courses related to your research interests]</p>
+        <p>GPA: [Your GPA] • Dean's List: [Semesters if applicable]</p>
+      </div>
+    </Section>
 
-  <div class="section">
-    <h2>Research Interests</h2>
-    <p>Your research interests and areas of focus.</p>
-  </div>
+    <Section title="Research Interests" id="research">
+      <ul>
+        <li>[Primary Research Area] - Brief description of your interest and any experience</li>
+        <li>[Secondary Research Area] - What specifically interests you about this field</li>
+        <li>[Third Research Area] - Connection to your academic and career goals</li>
+      </ul>
+      
+      <p>My research interests are driven by [what motivates your research]. I am particularly excited about the potential applications in [specific applications or impact areas].</p>
+    </Section>
+
+    <Section title="Projects & Coursework" id="projects">
+      <div class="project-item">
+        <h3>[Project Title]</h3>
+        <p class="text-muted">[Course Name or Independent Study] • [Semester/Year]</p>
+        <p>Brief description of the project, methodologies used, and key findings or outcomes. Highlight any research skills developed.</p>
+      </div>
+      
+      <div class="project-item">
+        <h3>[Another Project Title]</h3>
+        <p class="text-muted">[Context] • [Timeframe]</p>
+        <p>Description focusing on academic rigor, problem-solving approaches, and relevance to your research interests.</p>
+      </div>
+    </Section>
+
+    <Section title="Skills & Competencies" id="skills">
+      <div class="skills-grid">
+        <div class="skill-category">
+          <h3>Technical Skills</h3>
+          <p>[Programming languages, software tools, laboratory techniques, etc.]</p>
+        </div>
+        
+        <div class="skill-category">
+          <h3>Research Methods</h3>
+          <p>[Data analysis, literature review, experimental design, statistical analysis, etc.]</p>
+        </div>
+        
+        <div class="skill-category">
+          <h3>Academic Skills</h3>
+          <p>[Academic writing, presentation, peer review, project management, etc.]</p>
+        </div>
+      </div>
+    </Section>
+  </main>
 </Layout>
 
 <style>
-  .subtitle {
-    font-size: var(--text-xl);
-    color: var(--color-text-secondary);
+  .education-item,
+  .project-item {
     margin-bottom: var(--space-6);
+    padding-bottom: var(--space-4);
+    border-bottom: 1px solid var(--border-secondary);
+  }
+  
+  .education-item:last-child,
+  .project-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+  }
+  
+  .education-item h3,
+  .project-item h3 {
+    font-size: var(--text-lg);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    margin-bottom: var(--space-2);
+  }
+  
+  .skills-grid {
+    display: grid;
+    gap: var(--space-6);
+  }
+  
+  .skill-category h3 {
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    margin-bottom: var(--space-2);
+  }
+  
+  /* Responsive skills grid */
+  @media (min-width: 768px) {
+    .skills-grid {
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+  }
+  
+  /* Print optimizations */
+  @media print {
+    .education-item,
+    .project-item {
+      page-break-inside: avoid;
+      margin-bottom: var(--space-4);
+    }
   }
 </style>

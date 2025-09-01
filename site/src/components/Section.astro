@@ -1,0 +1,96 @@
+---
+import BaseComponent from './BaseComponent.astro';
+
+export interface Props {
+  title?: string;
+  subtitle?: string;
+  id?: string;
+  class?: string;
+  as?: 'section' | 'article' | 'div';
+  'aria-labelledby'?: string;
+}
+
+const {
+  title,
+  subtitle,
+  id,
+  class: className = '',
+  as = 'section',
+  'aria-labelledby': ariaLabelledby,
+  ...rest
+} = Astro.props;
+
+// Generate unique ID for accessibility if title is provided
+const headingId = title ? (id ? `${id}-heading` : `section-heading-${Math.random().toString(36).slice(2, 9)}`) : undefined;
+---
+
+<BaseComponent
+  as={as}
+  class={`section ${className}`}
+  id={id}
+  aria-labelledby={ariaLabelledby || headingId}
+  {...rest}
+>
+  {title && (
+    <header class="section-header">
+      <h2 id={headingId} class="section-title">
+        {title}
+      </h2>
+      {subtitle && (
+        <p class="section-subtitle">
+          {subtitle}
+        </p>
+      )}
+    </header>
+  )}
+  
+  <div class="section-content">
+    <slot />
+  </div>
+</BaseComponent>
+
+<style>
+  .section {
+    margin-bottom: var(--space-section);
+  }
+  
+  .section:last-child {
+    margin-bottom: var(--space-8);
+  }
+  
+  .section-header {
+    margin-bottom: var(--space-6);
+  }
+  
+  .section-title {
+    font-size: var(--text-2xl);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    margin-bottom: var(--space-2);
+    line-height: var(--leading-tight);
+  }
+  
+  .section-subtitle {
+    font-size: var(--text-lg);
+    color: var(--text-body);
+    font-weight: var(--font-weight-normal);
+    line-height: var(--leading-normal);
+    margin-bottom: 0;
+  }
+  
+  .section-content {
+    line-height: var(--leading-relaxed);
+  }
+  
+  /* Print optimization */
+  @media print {
+    .section {
+      margin-bottom: var(--space-6);
+      page-break-inside: avoid;
+    }
+    
+    .section-header {
+      margin-bottom: var(--space-4);
+    }
+  }
+</style>

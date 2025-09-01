@@ -1,0 +1,119 @@
+---
+import Icon from './Icon.astro';
+
+export interface Props {
+  links: Array<{
+    platform: 'github' | 'linkedin' | 'email';
+    url: string;
+    label: string;
+  }>;
+  class?: string;
+  size?: 'sm' | 'base' | 'lg';
+}
+
+const {
+  links,
+  class: className = '',
+  size = 'base'
+} = Astro.props;
+---
+
+<nav class={`social-links ${className}`} aria-label="Social media and contact links">
+  <ul class="social-list" role="list">
+    {links.map(({ platform, url, label }) => (
+      <li class="social-item">
+        <a
+          href={url}
+          class="social-link"
+          aria-label={label}
+          target={platform === 'email' ? undefined : '_blank'}
+          rel={platform === 'email' ? undefined : 'noopener noreferrer'}
+        >
+          <Icon 
+            name={platform} 
+            size={size} 
+            aria-hidden="true"
+          />
+          <span class="social-text sr-only">{label}</span>
+        </a>
+      </li>
+    ))}
+  </ul>
+</nav>
+
+<style>
+  .social-links {
+    display: flex;
+    align-items: center;
+  }
+  
+  .social-list {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .social-item {
+    margin: 0;
+  }
+  
+  .social-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-2);
+    border-radius: var(--radius-base);
+    transition: all var(--duration-base) var(--ease-out);
+    text-decoration: none;
+    color: var(--text-body);
+  }
+  
+  .social-link:hover {
+    color: var(--interactive-hover);
+    background-color: var(--surface-secondary);
+    transform: translateY(-1px);
+  }
+  
+  .social-link:focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 2px;
+  }
+  
+  .social-link:active {
+    transform: translateY(0);
+  }
+  
+  /* Accessible text that's visually hidden */
+  .social-text {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+  
+  /* Print styles - show text labels */
+  @media print {
+    .social-text {
+      position: static;
+      width: auto;
+      height: auto;
+      padding: 0 0 0 var(--space-2);
+      margin: 0;
+      overflow: visible;
+      clip: auto;
+      white-space: normal;
+    }
+    
+    .social-link {
+      color: var(--text-inverse);
+    }
+  }
+</style>
