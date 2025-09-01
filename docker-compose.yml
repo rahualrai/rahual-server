@@ -20,7 +20,7 @@ services:
     ports:
       - "3000:80"
     volumes:
-      - ./site:/usr/share/caddy
+      - ./site/dist:/usr/share/caddy
       - ./Caddyfile:/etc/caddy/Caddyfile
     networks:
       - web-network
